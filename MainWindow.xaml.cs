@@ -24,5 +24,11 @@ namespace PDFSigner
         {
             InitializeComponent();
         }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            ConfigWindow cw = new ConfigWindow();
+            cw.ShowDialog();
+        }
     }
 }

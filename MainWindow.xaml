@@ -5,8 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PDFSigner"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Assinador PDF" Height="450" Width="800" Icon="Img/pdf.png">
     <Grid>
-        
+        <Menu x:Name="menu" HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" Width="782">
+            <MenuItem Header="Configurações" Height="30" Width="100" Click="MenuItem_Click"/>
+        </Menu>
+
     </Grid>
 </Window>
