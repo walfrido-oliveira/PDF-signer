@@ -59,6 +59,9 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WpfAnimatedGif, Version=2.0.0.0, Culture=neutral, PublicKeyToken=9e7cd3b544a090dc, processorArchitecture=MSIL">
+      <HintPath>packages\WpfAnimatedGif.2.0.0\lib\net40\WpfAnimatedGif.dll</HintPath>
+    </Reference>
     <Reference Include="Xceed.Wpf.AvalonDock, Version=4.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
       <HintPath>packages\Extended.Wpf.Toolkit.4.0.1\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
     </Reference>
@@ -85,6 +88,7 @@
     </Compile>
     <Compile Include="Signer\ExternalSignature.cs" />
     <Compile Include="Signer\Signer.cs" />
+    <Compile Include="Signer\SignerCollection.cs" />
     <Page Include="ConfigWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -132,6 +136,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Img\pdf.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Img\drag-and-drop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Img\aguarde.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

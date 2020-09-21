@@ -3,13 +3,16 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:gif="http://wpfanimatedgif.codeplex.com"
         xmlns:local="clr-namespace:PDFSigner"
         mc:Ignorable="d"
-        Title="Assinador PDF" Height="450" Width="800" Icon="Img/pdf.png">
+        Title="Assinador PDF" Height="450" Width="800" Icon="Img/pdf.png" MinHeight="450" MinWidth="800">
     <Grid>
-        <Menu x:Name="menu" HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" Width="782">
-            <MenuItem Header="Configurações" Height="30" Width="100" Click="MenuItem_Click"/>
+        <Menu x:Name="menu" Height="30" VerticalAlignment="Top">
+            <MenuItem Header="Configurações" Height="30" Width="146" Click="MenuItem_Click" FontWeight="Bold" FontSize="16"/>
         </Menu>
+        <Image x:Name="image" Height="178" Margin="293,83,268,158" Width="231" Source="Img/drag-and-drop.png" DragOver="Image_DragOver"  MouseLeftButtonDown="Image_MouseLeftButtonDown" DragEnter="Image_DragEnter" AllowDrop="True" DragLeave="Image_DragLeave" Drop="Image_Drop"/>
+        <Image x:Name="wait" gif:ImageBehavior.AnimatedSource="Img/aguarde.gif" Margin="278,314,242,10" HorizontalAlignment="Center" VerticalAlignment="Center" Width="192" Height="95" Visibility="Hidden"/>
 
     </Grid>
 </Window>

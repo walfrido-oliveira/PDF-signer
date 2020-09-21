@@ -16,10 +16,9 @@ namespace PDFSigner.Signer
 
         public Config.Config Config { get; set; }
 
-        public Signer(string input, string output, Config.Config config)
+        public Signer(string input, Config.Config config)
         {
             Input = input;
-            Output = output;
             Config = config;
             ConfigOutput();
         }
@@ -53,6 +52,40 @@ namespace PDFSigner.Signer
                 return true;
 
             } catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public bool Signin(X509Certificate2 cert)
+        {
+            try
+            {
+                if (cert == null) return false;
+
+                X509CertificateParser cp = new X509CertificateParser();
+                Org.BouncyCastle.X509.X509Certificate[] chain = new Org.BouncyCastle.X509.X509Certificate[] { cp.ReadCertificate(cert.RawData) };
+                IExternalSignature externalSignature = new X509Certificate2Signature(cert, "SHA-1");
+
+                PdfReader reader = new PdfReader(Input);
+                PdfStamper st = PdfStamper.CreateSignature(reader, new FileStream(Output, FileMode.Create, FileAccess.Write), '\0', null, true);
+                PdfSignatureAppearance sap = st.SignatureAppearance;
+                ConfigPDFSignatureAppearance(sap, reader);
+
+                MakeSignature.SignDetached(sap, externalSignature, chain, null, null, null, 0, CryptoStandard.CMS);
+
+                if (Config.GetOverlap())
+                {
+                    File.Delete(Input);
+                    File.Copy(Output, Input);
+                    File.Delete(Output);
+                }
+
+                st.Close();
+                return true;
+
+            }
+            catch (Exception)
             {
                 return false;
             }

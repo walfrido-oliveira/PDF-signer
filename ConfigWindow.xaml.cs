@@ -91,7 +91,12 @@ namespace PDFSigner
 
         private void ChkSignerTextVisible_Checked(object sender, RoutedEventArgs e)
         {
-            Config.SetTextSignerVisible(chkSignerTextVisible.IsChecked.Value);
+            Config.SetTextSignerVisible(true);
+        }
+
+        private void chkSignerTextVisible_Unchecked(object sender, RoutedEventArgs e)
+        {
+            Config.SetTextSignerVisible(false);
         }
 
         private void RbFirstPage_Checked(object sender, RoutedEventArgs e)
@@ -153,12 +158,20 @@ namespace PDFSigner
 
         private void TxtX_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            Config.SetX((float)txtX.Value.Value);
+            if (!string.IsNullOrWhiteSpace(txtX.Text))
+            {
+                Config.SetX((float)txtX.Value.Value);
+            }
         }
 
         private void TxtY_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            Config.SetY((float)txtY.Value.Value);
+            if (!string.IsNullOrWhiteSpace(txtY.Text))
+            {
+                Config.SetY((float)txtY.Value.Value);
+            }
         }
+
+       
     }
 }
