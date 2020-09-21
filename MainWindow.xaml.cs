@@ -91,21 +91,21 @@ namespace PDFSigner
             {
                 SignerCollection items = new SignerCollection();
                 Config.Config config = new Config.Config();
-
+           
                 wait.Visibility = Visibility.Visible;
                 foreach (string item in files)
                 {
                     Signer.Signer siger = new Signer.Signer(item, config);
-                    items.Items.Add(siger);
+                    items.Add(siger);
                 }
 
-                if (items.Items.Count > 0)
+                if (items.Count > 0)
                 {
-                    items.SigninColletion();
+                    items.Signin();
 
                     if (config.GetOverlap())
                     {
-                        string output = items.Items[0].Output;
+                        string output = items[0].Output;
                         output = output.Substring(0, output.LastIndexOf("\\"));
                         System.Diagnostics.Process.Start(output);
                     }
@@ -136,16 +136,16 @@ namespace PDFSigner
                 foreach (string item in files)
                 {
                     Signer.Signer siger = new Signer.Signer(item, config);
-                    items.Items.Add(siger);
+                    items.Add(siger);
                 }
 
-                if (items.Items.Count > 0)
+                if (items.Count > 0)
                 {
-                    items.SigninColletion();
+                    items.Signin();
 
                     if (config.GetOverlap())
                     {
-                        string output = items.Items[0].Output;
+                        string output = items[0].Output;
                         output = output.Substring(0, output.LastIndexOf("\\"));
                         System.Diagnostics.Process.Start(output);
                     }
