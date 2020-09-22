@@ -7,24 +7,26 @@ namespace PDFSigner.Config
     {
         public float GetX()
         {
-            return float.Parse(ConfigurationManager.AppSettings.Get("x"));
+            float.TryParse(ConfigurationManager.AppSettings.Get("x"), out float x);
+            return x;
         }
 
-        public float SetX(double value)
+        public float SetX(float value)
         {
             Write("x", value.ToString());
-            return float.Parse(ConfigurationManager.AppSettings.Get("x"));
+            return GetX();
         }
 
         public float GetY()
         {
-            return float.Parse(ConfigurationManager.AppSettings.Get("y"));
+            float.TryParse(ConfigurationManager.AppSettings.Get("y"), out float y);
+            return y;
         }
 
-        public float SetY(double value)
+        public float SetY(float value)
         {
             Write("y", value.ToString());
-            return float.Parse(ConfigurationManager.AppSettings.Get("y"));
+            return GetY();
         }
 
         public string GetImg()
@@ -51,13 +53,14 @@ namespace PDFSigner.Config
 
         public bool GetOverlap()
         {
-            return bool.Parse(ConfigurationManager.AppSettings.Get("overlap"));
+            bool.TryParse(ConfigurationManager.AppSettings.Get("overlap"), out bool overlap);
+            return overlap;
         }
 
         public bool SetOverlap(bool value)
         {
             Write("overlap", value.ToString());
-            return bool.Parse(ConfigurationManager.AppSettings.Get("overlap"));
+            return GetOverlap();
         }
 
         public string GetSignerText()
@@ -73,79 +76,86 @@ namespace PDFSigner.Config
 
         public bool GetSignerVisible()
         {
-            return bool.Parse(ConfigurationManager.AppSettings.Get("signerVisible"));
+            bool.TryParse(ConfigurationManager.AppSettings.Get("signerVisible"), out bool signerVisible);
+            return signerVisible;
         }
 
         public bool SetSignerVisible(bool value)
         {
             Write("signerVisible", value.ToString());
-            return bool.Parse(ConfigurationManager.AppSettings.Get("signerVisible"));
+            return GetSignerVisible();
         }
 
         public bool GetTextSignerVisible()
         {
-            return bool.Parse(ConfigurationManager.AppSettings.Get("textSignerVisible"));
+            bool.TryParse(ConfigurationManager.AppSettings.Get("textSignerVisible"), out bool textSignerVisible);
+            return textSignerVisible;
         }
 
         public bool SetTextSignerVisible(bool value)
         {
             Write("textSignerVisible", value.ToString());
-            return bool.Parse(ConfigurationManager.AppSettings.Get("textSignerVisible"));
+            return GetTextSignerVisible();
         }
 
         public int GetNumberPage()
         {
-            return int.Parse(ConfigurationManager.AppSettings.Get("numberPage"));
+            int.TryParse(ConfigurationManager.AppSettings.Get("numberPage"), out int numverPage);
+            return numverPage;
         }
 
         public int SetNumberPage(int value)
         {
             Write("numberPage", value.ToString());
-            return int.Parse(ConfigurationManager.AppSettings.Get("numberPage"));
+            return GetNumberPage();
         }
 
         public bool  GetFirstPage()
         {
-            return bool.Parse(ConfigurationManager.AppSettings.Get("firstPage"));
+            bool.TryParse(ConfigurationManager.AppSettings.Get("firstPage"), out bool firstPage);
+            return firstPage;
         }
 
         public bool SetFirstPage(bool value)
         {
             Write("firstPage", value.ToString());
-            return bool.Parse(ConfigurationManager.AppSettings.Get("firstPage"));
+            return GetFirstPage();
         }
 
         public bool GetLastPage()
         {
-            return bool.Parse(ConfigurationManager.AppSettings.Get("lastPage"));
+            bool.TryParse(ConfigurationManager.AppSettings.Get("lastPage"), out bool lastPage);
+            return lastPage;
         }
 
         public bool SetLastPage(bool value)
         {
             Write("lastPage", value.ToString());
-            return bool.Parse(ConfigurationManager.AppSettings.Get("lastPage"));
+            return GetLastPage();
         }
 
         public float GetSizeImg()
         {
-            return float.Parse( ConfigurationManager.AppSettings.Get("sizeImg"));
+            float.TryParse( ConfigurationManager.AppSettings.Get("sizeImg"), out float sizeImg);
+            return sizeImg;
         }
 
         public float SetSizeImg(float value)
         {
             Write("sizeImg", value.ToString());
-            return float.Parse(ConfigurationManager.AppSettings.Get("sizeImg"));
+            return GetSizeImg();
         }
 
         public float GetFontSize()
         {
-            return float.Parse(ConfigurationManager.AppSettings.Get("fontSize"));
+            float.TryParse(ConfigurationManager.AppSettings.Get("fontSize"), out float fontSize);
+            return fontSize;
         }
 
         public float SetFontSize(float value)
         {
             Write("fontSize", value.ToString());
-            return float.Parse(ConfigurationManager.AppSettings.Get("fontSize"));
+            return GetFontSize();
         }
 
         public void Write(string key, string value)
