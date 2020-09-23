@@ -1,6 +1,6 @@
 # PDF Signer
 
-This application allows signing PDF files with SHA-1 certs with image and text. The application contains a simple config page to choose signature parameters, image position, font size and page signature local. It's possible either signing one or more files in a single time.
+This application allows signing PDF files with SHA-1 certs with image and text. The application contains a simple config page to choose signature parameters: image position, font size and page signature local. It's possible either signing one or more files in a single time.
 
 ## Build the aplication
 
