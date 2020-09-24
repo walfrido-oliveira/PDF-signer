@@ -1,5 +1,7 @@
 # PDF Signer
 
+[![version](https://img.shields.io/badge/version-1.0.0.1-yellow.svg)](https://semver.org)
+
 This application allows signing PDF files with SHA-1 certs with image and text. The application contains a simple config page to choose signature parameters: image position, font size and page signature local. It's possible either signing one or more files in a single time.
 
 ## Build the aplication
