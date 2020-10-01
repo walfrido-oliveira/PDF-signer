@@ -14,9 +14,9 @@ namespace PDFSigner.Signer
 
         public string Output { get; set; }
 
-        public Config.Config Config { get; set; }
+        public Model.Config Config { get; set; }
 
-        public Signer(string input, Config.Config config)
+        public Signer(string input, Model.Config config)
         {
             Input = input;
             Config = config;
@@ -41,7 +41,7 @@ namespace PDFSigner.Signer
 
                 MakeSignature.SignDetached(sap, externalSignature, chain, null, null, null, 0, CryptoStandard.CMS);
 
-                if (Config.GetOverlap())
+                if (Config.Overlap)
                 {
                     File.Delete(Input);
                     File.Copy(Output, Input);
@@ -74,7 +74,7 @@ namespace PDFSigner.Signer
 
                 MakeSignature.SignDetached(sap, externalSignature, chain, null, null, null, 0, CryptoStandard.CMS);
 
-                if (Config.GetOverlap())
+                if (Config.Overlap)
                 {
                     File.Delete(Input);
                     File.Copy(Output, Input);
@@ -95,26 +95,26 @@ namespace PDFSigner.Signer
         {
             int numberPage = 0;
 
-            if (Config.GetFirstPage()) numberPage = 1;
-            if (Config.GetLastPage()) numberPage = reader.NumberOfPages;
-            if (!Config.GetLastPage() && !Config.GetFirstPage()) numberPage = Config.GetNumberPage();
+            if (Config.FirstPage) numberPage = 1;
+            if (Config.LastPage) numberPage = reader.NumberOfPages;
+            if (!Config.LastPage && !Config.FirstPage) numberPage = Config.NumberPage;
             
-            if (Config.GetSignerVisible())
+            if (Config.SignerVisible)
             {
                 sap.Layer2Text = "";
-                if (Config.GetTextSignerVisible())
+                if (Config.TextSignerVisible)
                 {
-                    sap.Layer2Text = Config.GetSignerText();
-                    sap.Layer2Font = new Font(Font.FontFamily.TIMES_ROMAN, Config.GetFontSize());
+                    sap.Layer2Text = Config.SignerText;
+                    sap.Layer2Font = new Font(Font.FontFamily.TIMES_ROMAN, Config.FontSize);
                 }
 
-                if (!File.Exists(Config.GetImg())) throw new Exception(string.Format("Image for signer not found.", Config.GetImg()));
-                sap.Image = Image.GetInstance(Config.GetImg());
+                if (!File.Exists(Config.Img)) throw new Exception(string.Format("Image for signer not found.", Config.Img));
+                sap.Image = Image.GetInstance(Config.Img);
 
-                float ury = ((Config.GetX() / 100) * reader.GetPageSize(numberPage).Height);
-                float lly = ury + (sap.Image.Height) * (Config.GetSizeImg() / 100);
-                float llx = ((Config.GetY() / 100) * reader.GetPageSize(numberPage).Width);
-                float urx = llx + (sap.Image.Width) * (Config.GetSizeImg() / 100);
+                float ury = ((Config.X / 100) * reader.GetPageSize(numberPage).Height);
+                float lly = ury + (sap.Image.Height) * (Config.SizeImg / 100);
+                float llx = ((Config.Y / 100) * reader.GetPageSize(numberPage).Width);
+                float urx = llx + (sap.Image.Width) * (Config.SizeImg / 100);
 
                 Rectangle rectagle = new Rectangle(llx, lly, urx, ury);
                 sap.SetVisibleSignature(rectagle, numberPage, null);
@@ -126,13 +126,13 @@ namespace PDFSigner.Signer
         private void ConfigOutput()
         {
             if (!File.Exists(Input)) throw new Exception(string.Format("This file {0} not found.", Input));
-            if (Config.GetOverlap())
+            if (Config.Overlap)
             {
                 Output = Input + ".output";
             }
             else
             {
-                Output = Config.GetOutputFolder() + Input.Substring(Input.LastIndexOf("\\")); 
+                Output = Config.OutputFolder + Input.Substring(Input.LastIndexOf("\\")); 
             }
 
         }

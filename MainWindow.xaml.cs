@@ -1,18 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Forms;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using PDFSigner.Signer;
 
 namespace PDFSigner
@@ -25,12 +15,23 @@ namespace PDFSigner
         public MainWindow()
         {
             InitializeComponent();
+            SetCombobox();
         }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
             ConfigWindow cw = new ConfigWindow();
-            cw.ShowDialog();
+            if ((bool)cw.ShowDialog())
+            {
+                SetCombobox();
+            }
+        }
+
+        private void SetCombobox()
+        {
+            comboBox.Items.Clear();
+            new Model.Config().ListAll().ForEach(item => comboBox.Items.Add(item));
+            if (comboBox.Items.Count > 0) comboBox.SelectedIndex = 0;
         }
 
         private readonly List<string> files = new List<string>();
@@ -89,8 +90,14 @@ namespace PDFSigner
         {
             try
             {
+                if (comboBox.SelectedIndex == -1 )
+                {
+                    System.Windows.MessageBox.Show("Selecione um configuração!");
+                    return;
+                }
+
                 SignerCollection items = new SignerCollection();
-                Config.Config config = new Config.Config();
+                Model.Config config = (Model.Config)comboBox.SelectedItem;
            
                 wait.Visibility = Visibility.Visible;
                 foreach (string item in files)
@@ -103,7 +110,7 @@ namespace PDFSigner
                 {
                     items.Signin();
 
-                    if (config.GetOverlap())
+                    if (config.Overlap)
                     {
                         string output = items[0].Output;
                         output = output.Substring(0, output.LastIndexOf("\\"));
@@ -111,7 +118,7 @@ namespace PDFSigner
                     }
                     else
                     {
-                        System.Diagnostics.Process.Start(config.GetOutputFolder());
+                        System.Diagnostics.Process.Start(config.OutputFolder);
                     }
                 }
             }
@@ -129,8 +136,14 @@ namespace PDFSigner
         {
             try
             {
+                if (comboBox.SelectedIndex == -1)
+                {
+                    System.Windows.MessageBox.Show("Selecione um configuração!");
+                    return;
+                }
+
                 SignerCollection items = new SignerCollection();
-                Config.Config config = new Config.Config();
+                Model.Config config = (Model.Config)comboBox.SelectedItem;
 
                 wait.Visibility = Visibility.Visible;
                 foreach (string item in files)
@@ -143,7 +156,7 @@ namespace PDFSigner
                 {
                     items.Signin();
 
-                    if (config.GetOverlap())
+                    if (config.Overlap)
                     {
                         string output = items[0].Output;
                         output = output.Substring(0, output.LastIndexOf("\\"));
@@ -151,7 +164,7 @@ namespace PDFSigner
                     }
                     else
                     {
-                        System.Diagnostics.Process.Start(config.GetOutputFolder());
+                        System.Diagnostics.Process.Start(config.OutputFolder);
                     }
                 }
             }

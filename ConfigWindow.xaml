@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
-        Title="Configurar Assinador" Height="643" Width="889.751" MinWidth="889" MinHeight="200" Icon="Img/pdf.png" Loaded="Window_Loaded">
+        Title="Configurar Assinador" Height="643" Width="889.751" MinWidth="889" MinHeight="200" Icon="Img/pdf.png" Loaded="Window_Loaded" Closing="Window_Closing">
     <Grid Margin="0,110,2,4" RenderTransformOrigin="0.6,0.493">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="50*"/>

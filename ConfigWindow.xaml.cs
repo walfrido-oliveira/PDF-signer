@@ -158,8 +158,11 @@ namespace PDFSigner
 
         private void TxtNumberPage_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            Config.NumberPage = txtNumberPage.Value.Value;
-            Config.InsertOrUpdate();
+            if (Config != null)
+            {
+                Config.NumberPage = txtNumberPage.Value.Value;
+                Config.InsertOrUpdate();
+            }
         }
 
         private void TxtSizeImg_TextChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
@@ -256,6 +259,11 @@ namespace PDFSigner
         {
             if (Config != null) Config.Delete();
             SetCombobox();
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            DialogResult = true;
         }
     }
 }
