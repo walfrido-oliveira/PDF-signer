@@ -3,8 +3,13 @@
   <COMPONENT cid="caphyon.advinst.msicomp.MsiPropsComponent">
     <ROW Property="AI_BITMAP_DISPLAY_MODE" Value="0"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_BouncyCastle.Crypto.dll" Value="..\packages\BouncyCastle.1.8.6.1\lib"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_EntityFramework.SqlServer.dll" Value="..\packages\EntityFramework.6.3.0\lib\net45"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_EntityFramework.dll" Value="..\packages\EntityFramework.6.3.0\lib\net45"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_PDFSigner.exe" Value="..\bin\Release"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_PDFSigner.exe.config" Value="..\bin\Release"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_System.Data.SQLite.EF6.dll" Value="..\packages\System.Data.SQLite.EF6.1.0.113.0\lib\net46"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_System.Data.SQLite.Linq.dll" Value="..\packages\System.Data.SQLite.Linq.1.0.113.0\lib\net46"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_System.Data.SQLite.dll" Value="..\packages\System.Data.SQLite.Core.1.0.113.1\lib\net46"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_WpfAnimatedGif.dll" Value="..\packages\WpfAnimatedGif.2.0.0\lib\net40"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_Xceed.Wpf.AvalonDock.Themes.Aero.dll" Value="..\packages\Extended.Wpf.Toolkit.4.0.1\lib\net40"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_Xceed.Wpf.AvalonDock.Themes.Metro.dll" Value="..\packages\Extended.Wpf.Toolkit.4.0.1\lib\net40"/>
@@ -12,9 +17,15 @@
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_Xceed.Wpf.AvalonDock.dll" Value="..\packages\Extended.Wpf.Toolkit.4.0.1\lib\net40"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_Xceed.Wpf.Toolkit.dll" Value="..\packages\Extended.Wpf.Toolkit.4.0.1\lib\net40"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_itextsharp.dll" Value="..\packages\iTextSharp.5.5.13.2\lib"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_signerpdf.db" Value="..\bin\Release"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_BouncyCastle.Crypto.dll" Value="BouncyCastle.Crypto.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_EntityFramework.SqlServer.dll" Value="EntityFramework.SqlServer.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_EntityFramework.dll" Value="EntityFramework.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_PDFSigner.exe" Value="PDFSigner.exe"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_PDFSigner.exe.config" Value="PDFSigner.exe.config"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_System.Data.SQLite.EF6.dll" Value="System.Data.SQLite.EF6.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_System.Data.SQLite.Linq.dll" Value="System.Data.SQLite.Linq.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_System.Data.SQLite.dll" Value="System.Data.SQLite.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_WpfAnimatedGif.dll" Value="WpfAnimatedGif.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Xceed.Wpf.AvalonDock.Themes.Aero.dll" Value="Xceed.Wpf.AvalonDock.Themes.Aero.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Xceed.Wpf.AvalonDock.Themes.Metro.dll" Value="Xceed.Wpf.AvalonDock.Themes.Metro.dll"/>
@@ -22,6 +33,7 @@
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Xceed.Wpf.AvalonDock.dll" Value="Xceed.Wpf.AvalonDock.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Xceed.Wpf.Toolkit.dll" Value="Xceed.Wpf.Toolkit.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_itextsharp.dll" Value="itextsharp.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_signerpdf.db" Value="signerpdf.db"/>
     <ROW Property="ALLUSERS" Value="1"/>
     <ROW Property="ARPCOMMENTS" Value="This application allows signing PDF files with SHA-1 certs with image and text. The application contains a simple config page to choose signature parameters, image position, font size and page signature local. It&apos;s possible either signing one or more files in a single time." ValueLocId="*"/>
     <ROW Property="ARPHELPLINK" Value="https://mwsystems.com.br/"/>
@@ -51,8 +63,9 @@
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiCompsComponent">
     <ROW Component="APPDIR" ComponentId="{19CE28C1-F136-49D9-8E90-361379F71517}" Directory_="APPDIR" Attributes="0"/>
+    <ROW Component="PDFSigner_ContentOutput" ComponentId="{F46EE7D4-DE00-4633-88FF-8D69540E9BB6}" Directory_="PDFSigner_Dir" Attributes="0" KeyPath="signerpdf.db" Type="0"/>
     <ROW Component="PDFSigner_PrimaryOutput" ComponentId="{9A69A17A-8035-4F53-8210-0218606B77E0}" Directory_="PDFSigner_Dir" Attributes="0" KeyPath="PDFSigner.exe"/>
-    <ROW Component="PDFSigner_References" ComponentId="{238BC367-3460-4B9F-9CD8-7146DEB57187}" Directory_="PDFSigner_Dir" Attributes="0" KeyPath="Xceed.Wpf.Toolkit.dll"/>
+    <ROW Component="PDFSigner_References" ComponentId="{238BC367-3460-4B9F-9CD8-7146DEB57187}" Directory_="PDFSigner_Dir" Attributes="0" KeyPath="System.Data.SQLite.Linq.dll"/>
     <ROW Component="ProductInformation" ComponentId="{69DF84E7-7112-48A9-89C2-0C43F449D8EA}" Directory_="APPDIR" Attributes="4" KeyPath="Version"/>
     <ROW Component="SHORTCUTDIR" ComponentId="{A67C44F1-C6DF-4472-9146-58ABDA339A5F}" Directory_="SHORTCUTDIR" Attributes="0"/>
   </COMPONENT>
@@ -71,11 +84,22 @@
     <ROW File="Xceed.Wpf.AvalonDock.Themes.Metro.dll" Component_="PDFSigner_References" FileName="XCEEDW~4.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Xceed.Wpf.AvalonDock.Themes.Metro.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Xceed.Wpf.AvalonDock.Themes.Metro.dll&gt;" SelfReg="false"/>
     <ROW File="Xceed.Wpf.AvalonDock.Themes.VS2010.dll" Component_="PDFSigner_References" FileName="XCEEDW~5.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Xceed.Wpf.AvalonDock.Themes.VS2010.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Xceed.Wpf.AvalonDock.Themes.VS2010.dll&gt;" SelfReg="false"/>
     <ROW File="Xceed.Wpf.Toolkit.dll" Component_="PDFSigner_References" FileName="XCEEDW~6.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Xceed.Wpf.Toolkit.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Xceed.Wpf.Toolkit.dll&gt;" SelfReg="false"/>
+    <ROW File="EntityFramework.dll" Component_="PDFSigner_References" FileName="ENTITY~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_EntityFramework.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_EntityFramework.dll&gt;" SelfReg="false"/>
+    <ROW File="EntityFramework.SqlServer.dll" Component_="PDFSigner_References" FileName="ENTITY~3.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_EntityFramework.SqlServer.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_EntityFramework.SqlServer.dll&gt;" SelfReg="false"/>
+    <ROW File="System.Data.SQLite.dll" Component_="PDFSigner_References" FileName="SYSTEM~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_System.Data.SQLite.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_System.Data.SQLite.dll&gt;" SelfReg="false"/>
+    <ROW File="System.Data.SQLite.EF6.dll" Component_="PDFSigner_References" FileName="SYSTEM~3.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_System.Data.SQLite.EF6.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_System.Data.SQLite.EF6.dll&gt;" SelfReg="false"/>
+    <ROW File="System.Data.SQLite.Linq.dll" Component_="PDFSigner_References" FileName="SYSTEM~4.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_System.Data.SQLite.Linq.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_System.Data.SQLite.Linq.dll&gt;" SelfReg="false"/>
+    <ROW File="signerpdf.db" Component_="PDFSigner_ContentOutput" FileName="SIGNER~2.DB|[|AI_PROPPATH_FILENAME_PERBUILD_signerpdf.db]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_signerpdf.db&gt;" SelfReg="false"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.AppPathsComponent">
     <ROW Name="AI_APPPATH_PERBUILD_BouncyCastle.Crypto.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_BouncyCastle.Crypto.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_BouncyCastle.Crypto.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_EntityFramework.SqlServer.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_EntityFramework.SqlServer.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_EntityFramework.SqlServer.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_EntityFramework.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_EntityFramework.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_EntityFramework.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_PDFSigner.exe" Path="[|AI_PROPPATH_DIR_PERBUILD_PDFSigner.exe]\[|AI_PROPPATH_FILENAME_PERBUILD_PDFSigner.exe]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_PDFSigner.exe.config" Path="[|AI_PROPPATH_DIR_PERBUILD_PDFSigner.exe.config]\[|AI_PROPPATH_FILENAME_PERBUILD_PDFSigner.exe.config]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_System.Data.SQLite.EF6.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_System.Data.SQLite.EF6.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_System.Data.SQLite.EF6.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_System.Data.SQLite.Linq.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_System.Data.SQLite.Linq.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_System.Data.SQLite.Linq.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_System.Data.SQLite.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_System.Data.SQLite.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_System.Data.SQLite.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_WpfAnimatedGif.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_WpfAnimatedGif.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_WpfAnimatedGif.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_Xceed.Wpf.AvalonDock.Themes.Aero.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Xceed.Wpf.AvalonDock.Themes.Aero.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Xceed.Wpf.AvalonDock.Themes.Aero.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_Xceed.Wpf.AvalonDock.Themes.Metro.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Xceed.Wpf.AvalonDock.Themes.Metro.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Xceed.Wpf.AvalonDock.Themes.Metro.dll]" Type="2" Content="0"/>
@@ -83,6 +107,7 @@
     <ROW Name="AI_APPPATH_PERBUILD_Xceed.Wpf.AvalonDock.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Xceed.Wpf.AvalonDock.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Xceed.Wpf.AvalonDock.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_Xceed.Wpf.Toolkit.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Xceed.Wpf.Toolkit.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Xceed.Wpf.Toolkit.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_itextsharp.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_itextsharp.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_itextsharp.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_signerpdf.db" Path="[|AI_PROPPATH_DIR_PERBUILD_signerpdf.db]\[|AI_PROPPATH_FILENAME_PERBUILD_signerpdf.db]" Type="2" Content="0"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.BootstrOptComponent">
     <ROW BootstrOptKey="GlobalOptions" DownloadFolder="[AppDataFolder][|Manufacturer]\[|ProductName]\prerequisites" Options="2"/>
@@ -159,6 +184,7 @@
     <ROW Feature_="MainFeature" Component_="PDFSigner_PrimaryOutput"/>
     <ROW Feature_="MainFeature" Component_="SHORTCUTDIR"/>
     <ROW Feature_="MainFeature" Component_="PDFSigner_References"/>
+    <ROW Feature_="MainFeature" Component_="PDFSigner_ContentOutput"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiIconsComponent">
     <ROW Name="pdf.exe" SourcePath="..\Img\pdf.ico" Index="0"/>
@@ -208,5 +234,11 @@
     <ROW ProjectId="{f67bb631-d8c9-4873-b65d-6d09853b4267}" ProjectName="PDFSigner" OutputGroup="References" OutputFile="Xceed.Wpf.AvalonDock.Themes.Metro.dll"/>
     <ROW ProjectId="{f67bb631-d8c9-4873-b65d-6d09853b4267}" ProjectName="PDFSigner" OutputGroup="References" OutputFile="Xceed.Wpf.AvalonDock.Themes.VS2010.dll"/>
     <ROW ProjectId="{f67bb631-d8c9-4873-b65d-6d09853b4267}" ProjectName="PDFSigner" OutputGroup="References" OutputFile="Xceed.Wpf.Toolkit.dll"/>
+    <ROW ProjectId="{f67bb631-d8c9-4873-b65d-6d09853b4267}" ProjectName="PDFSigner" OutputGroup="References" OutputFile="EntityFramework.dll"/>
+    <ROW ProjectId="{f67bb631-d8c9-4873-b65d-6d09853b4267}" ProjectName="PDFSigner" OutputGroup="References" OutputFile="EntityFramework.SqlServer.dll"/>
+    <ROW ProjectId="{f67bb631-d8c9-4873-b65d-6d09853b4267}" ProjectName="PDFSigner" OutputGroup="References" OutputFile="System.Data.SQLite.dll"/>
+    <ROW ProjectId="{f67bb631-d8c9-4873-b65d-6d09853b4267}" ProjectName="PDFSigner" OutputGroup="References" OutputFile="System.Data.SQLite.EF6.dll"/>
+    <ROW ProjectId="{f67bb631-d8c9-4873-b65d-6d09853b4267}" ProjectName="PDFSigner" OutputGroup="References" OutputFile="System.Data.SQLite.Linq.dll"/>
+    <ROW ProjectId="{f67bb631-d8c9-4873-b65d-6d09853b4267}" ProjectName="PDFSigner" OutputGroup="ContentOutput" OutputFile="signerpdf.db"/>
   </COMPONENT>
 </DOCUMENT>
