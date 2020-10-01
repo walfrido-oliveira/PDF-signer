@@ -1,4 +1,7 @@
-﻿using System.IO;
+﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
@@ -13,121 +16,168 @@ namespace PDFSigner
     public partial class ConfigWindow : Window
     {
 
-        public Config.Config Config { get; set; }
+        public Model.Config Config { get; set; }
 
         public ConfigWindow()
         {
             InitializeComponent();
-            Config = new Config.Config();
+            Config = new Model.Config();
+
+            SetCombobox();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            LoadConfig();
+            LoadConfig((Model.Config)cboConfig.SelectedItem);
         }
 
-        private void LoadConfig()
+        private void SetCombobox()
         {
-            rbOverplap.IsChecked = Config.GetOverlap();
-            rbNewFile.IsChecked = !Config.GetOverlap();
-            txtOutput.Text = Config.GetOutputFolder();
-            txtTextSigner.Text = Config.GetSignerText();
-            rbSignerInsible.IsChecked = !Config.GetSignerVisible(); 
-            rbSignerVisible.IsChecked = Config.GetSignerVisible();
-            chkSignerTextVisible.IsChecked = Config.GetTextSignerVisible();
-            rbFirstPage.IsChecked = Config.GetFirstPage();
-            rbLastPage.IsChecked = Config.GetLastPage();
-            rbNumberPage.IsChecked = !rbFirstPage.IsChecked.Value && !rbLastPage.IsChecked.Value;
-            txtNumberPage.Value = Config.GetNumberPage();
-            txtSizeImg.Value = (decimal) Config.GetSizeImg();
-            txtFontSize.Value = (decimal)Config.GetFontSize();
-            txtX.Value = (decimal)Config.GetX();
-            txtY.Value = (decimal)Config.GetY();
-            SetImage(Config.GetImg());
+            cboConfig.Items.Clear();
+            Config.ListAll().ForEach(item => cboConfig.Items.Add(item));
+            if (cboConfig.Items.Count > 0) cboConfig.SelectedIndex = 0;
+            else LoadConfig(null);
+        }
+
+        private void LoadConfig(Model.Config config)
+        {
+            Config = config;
+            if (config != null)
+            {
+                rbOverplap.IsChecked = config.Overlap;
+                rbNewFile.IsChecked = !config.Overlap;
+                txtOutput.Text = config.OutputFolder;
+                txtTextSigner.Text = config.SignerText;
+                rbSignerInsible.IsChecked = !config.SignerVisible;
+                rbSignerVisible.IsChecked = config.SignerVisible;
+                chkSignerTextVisible.IsChecked = config.TextSignerVisible;
+                rbFirstPage.IsChecked = config.FirstPage;
+                rbLastPage.IsChecked = config.LastPage;
+                rbNumberPage.IsChecked = !rbFirstPage.IsChecked.Value && !rbLastPage.IsChecked.Value;
+                txtNumberPage.Value = config.NumberPage;
+                txtSizeImg.Value = (decimal)config.SizeImg;
+                txtFontSize.Value = (decimal)config.FontSize;
+                txtX.Value = (decimal)config.X;
+                txtY.Value = (decimal)config.Y;
+                SetImage(config.Img);
+            } else
+            {
+                txtOutput.Text = "";
+                txtTextSigner.Text = "";
+                txtNumberPage.Value = 0;
+                txtSizeImg.Value = 0;
+                txtFontSize.Value = 0;
+                txtX.Value = 0;
+                txtY.Value = 0;
+                image.Source = null;
+ 
+                Config = new Model.Config();
+            }
         }
 
         private void RbOverplap_Checked(object sender, RoutedEventArgs e)
         {
-            Config.SetOverlap(rbOverplap.IsChecked.Value);
-            setNewFileFields((bool)!rbOverplap.IsChecked);
+            SetNewFileFields((bool)!rbOverplap.IsChecked);
         }
 
         private void RbNewFile_Checked(object sender, RoutedEventArgs e)
         {
-            setNewFileFields((bool)rbNewFile.IsChecked);
+            SetNewFileFields((bool)rbNewFile.IsChecked);
         }
 
-        private void setNewFileFields(bool enabled)
+        private void SetNewFileFields(bool enabled)
         {
             txtOutput.IsEnabled = enabled;
             btnSearchOutput.IsEnabled = enabled;
-            Config.SetOverlap(!enabled);
+            Config.Overlap = !enabled;
+            Config.InsertOrUpdate();
         }
 
-        private void btnSearchOutput_Click(object sender, RoutedEventArgs e)
+        private void BtnSearchOutput_Click(object sender, RoutedEventArgs e)
         {
             FolderBrowserDialog fb = new FolderBrowserDialog();
             if (fb.ShowDialog() ==  System.Windows.Forms.DialogResult.OK)
             {
                 txtOutput.Text = fb.SelectedPath;
-                Config.SetOutputFolder(fb.SelectedPath);
+                Config.OutputFolder = fb.SelectedPath;
+                Config.InsertOrUpdate();
             }
         }
 
         private void TxtTextSigner_TextChanged(object sender, TextChangedEventArgs e)
         {
-            Config.SetSignerText(txtTextSigner.Text);
+            if (!string.IsNullOrWhiteSpace(txtTextSigner.Text) && Config != null)
+            {
+                Config.SignerText = txtTextSigner.Text;
+                Config.InsertOrUpdate();
+            }
         }
 
         private void RbSignerInsible_Checked(object sender, RoutedEventArgs e)
         {
-            Config.SetSignerVisible(!rbSignerInsible.IsChecked.Value);
+            Config.SignerVisible = !rbSignerInsible.IsChecked.Value;
+            Config.InsertOrUpdate();
         }
 
         private void RbSignerVisible_Checked(object sender, RoutedEventArgs e)
         {
-            Config.SetSignerVisible(rbSignerVisible.IsChecked.Value);
+            Config.SignerVisible = rbSignerVisible.IsChecked.Value;
+            Config.InsertOrUpdate();
         }
 
         private void ChkSignerTextVisible_Checked(object sender, RoutedEventArgs e)
         {
-            Config.SetTextSignerVisible(true);
+            Config.TextSignerVisible = true;
+            Config.InsertOrUpdate();
         }
 
-        private void chkSignerTextVisible_Unchecked(object sender, RoutedEventArgs e)
+        private void ChkSignerTextVisible_Unchecked(object sender, RoutedEventArgs e)
         {
-            Config.SetTextSignerVisible(false);
+            Config.TextSignerVisible = false;
+            Config.InsertOrUpdate();
         }
 
         private void RbFirstPage_Checked(object sender, RoutedEventArgs e)
         {
-            Config.SetFirstPage(rbFirstPage.IsChecked.Value);
+            Config.FirstPage = rbFirstPage.IsChecked.Value;
+            Config.InsertOrUpdate();
         }
 
         private void RbLastPage_Checked(object sender, RoutedEventArgs e)
         {
-            Config.SetLastPage(rbLastPage.IsChecked.Value);
+            Config.LastPage = rbLastPage.IsChecked.Value;
+            Config.InsertOrUpdate();
         }
 
         private void RbNumberPage_Checked(object sender, RoutedEventArgs e)
         {
-            Config.SetFirstPage(false);
-            Config.SetLastPage(false);
+            Config.FirstPage = false;
+            Config.LastPage = false;
+            Config.InsertOrUpdate();
         }
 
         private void TxtNumberPage_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            Config.SetNumberPage(txtNumberPage.Value.Value);
+            Config.NumberPage = txtNumberPage.Value.Value;
+            Config.InsertOrUpdate();
         }
 
         private void TxtSizeImg_TextChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            Config.SetSizeImg((float) txtSizeImg.Value.Value );
+            if (int.TryParse(txtSizeImg.Text, out int result) && Config != null)
+            {
+                Config.SizeImg = result;
+                Config.InsertOrUpdate();
+            }
         }
 
         private void TxtFontSize_TextChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            Config.SetFontSize((float)txtFontSize.Value.Value);
+            if (int.TryParse(txtFontSize.Text, out int result) && Config != null)
+            {
+                Config.FontSize = result;
+                Config.InsertOrUpdate();
+            }
         }
 
        
@@ -139,7 +189,6 @@ namespace PDFSigner
             };
             if (fd.ShowDialog() == System.Windows.Forms.DialogResult.OK )
             {
-                Config.SetImg(fd.FileName);
                 SetImage(fd.FileName);
             }
         }
@@ -150,28 +199,63 @@ namespace PDFSigner
             {
                 BitmapImage bitmap = new BitmapImage();
                 bitmap.BeginInit();
-                bitmap.UriSource = new System.Uri(source);
+                bitmap.UriSource = new Uri(source);
                 bitmap.EndInit();
                 image.Source = bitmap;
+                Config.Img = source;
+                Config.InsertOrUpdate();
+            } 
+            else
+            {
+                image.Source = null;
             }
         }
 
         private void TxtX_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            if (!string.IsNullOrWhiteSpace(txtX.Text))
+            if (float.TryParse(txtX.Text, out float result) && Config != null)
             {
-                Config.SetX((float)txtX.Value.Value);
+                Config.X = result;
+                Config.InsertOrUpdate();
             }
         }
 
         private void TxtY_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            if (!string.IsNullOrWhiteSpace(txtY.Text))
+            if (float.TryParse(txtY.Text, out float result) && Config != null)
             {
-                Config.SetY((float)txtY.Value.Value);
+                Config.Y = result;
+                Config.InsertOrUpdate();
             }
         }
 
        
+        private void CboConfig_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Model.Config config = (Model.Config)cboConfig.SelectedItem;
+            if (config != null)
+            {
+                LoadConfig(config);
+            }
+        }
+
+        private void BtnNew_Click(object sender, RoutedEventArgs e)
+        {
+            Model.Config config = new Model.Config();
+
+            ModalWindow modalWindow = new ModalWindow();
+            modalWindow.ShowDialog();
+            config.Name = ModalWindow.Value;
+
+            config.Insert();
+            SetCombobox();
+            cboConfig.SelectedIndex = cboConfig.Items.Count - 1;
+        }
+
+        private void BtnDel_Click(object sender, RoutedEventArgs e)
+        {
+            if (Config != null) Config.Delete();
+            SetCombobox();
+        }
     }
 }

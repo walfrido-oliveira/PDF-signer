@@ -6,7 +6,7 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
         Title="Configurar Assinador" Height="643" Width="889.751" MinWidth="889" MinHeight="200" Icon="Img/pdf.png" Loaded="Window_Loaded">
-    <Grid Margin="0,0,2,4" RenderTransformOrigin="0.6,0.493">
+    <Grid Margin="0,110,2,4" RenderTransformOrigin="0.6,0.493">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="50*"/>
             <ColumnDefinition Width="50*"/>
@@ -16,7 +16,7 @@
                 <RadioButton x:Name="rbOverplap" Content="Sobrepor documento" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Checked="RbOverplap_Checked"/>
                 <RadioButton x:Name="rbNewFile" Content="Gerar novo documento" HorizontalAlignment="Left" Margin="0,30,0,0" VerticalAlignment="Top" Checked="RbNewFile_Checked"/>
                 <TextBox x:Name="txtOutput" HorizontalAlignment="Left" Height="23" Margin="0,50,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="376" IsEnabled="False" IsReadOnly="True"/>
-                <Button x:Name="btnSearchOutput" Content="..." HorizontalAlignment="Left" Margin="381,50,0,0" VerticalAlignment="Top" Width="27" RenderTransformOrigin="4.388,-1.031" Height="23" IsEnabled="False" Click="btnSearchOutput_Click"/>
+                <Button x:Name="btnSearchOutput" Content="..." HorizontalAlignment="Left" Margin="381,50,0,0" VerticalAlignment="Top" Width="27" RenderTransformOrigin="4.388,-1.031" Height="23" IsEnabled="False" Click="BtnSearchOutput_Click"/>
             </Grid>
         </GroupBox>
         <GroupBox x:Name="groupBox_Copy" Header="Configuração da assinatura" Height="164" Margin="10,179,0,0" VerticalAlignment="Top" Grid.Column="0">
@@ -27,7 +27,7 @@
                 </Grid.ColumnDefinitions>
                 <RadioButton x:Name="rbSignerInsible" Content="Assinatura invisível" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Grid.Column="0" Checked="RbSignerInsible_Checked"/>
                 <RadioButton x:Name="rbSignerVisible" Content="Assinatura visível" HorizontalAlignment="Left" Margin="0,25,0,0" VerticalAlignment="Top" Grid.Column="0" Checked="RbSignerVisible_Checked"/>
-                <CheckBox x:Name="chkSignerTextVisible" Content="Texto" HorizontalAlignment="Left" Margin="31,45,0,0" VerticalAlignment="Top" Grid.Column="0" Checked="ChkSignerTextVisible_Checked" Unchecked="chkSignerTextVisible_Unchecked"/>
+                <CheckBox x:Name="chkSignerTextVisible" Content="Texto" HorizontalAlignment="Left" Margin="31,45,0,0" VerticalAlignment="Top" Grid.Column="0" Checked="ChkSignerTextVisible_Checked" Unchecked="ChkSignerTextVisible_Unchecked"/>
                 <GroupBox x:Name="grpPage" Header="Página" Height="131"  VerticalAlignment="Top" Grid.Column="1">
                     <Grid>
                         <RadioButton x:Name="rbFirstPage" Content="Primeira" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Grid.Column="0" Checked="RbFirstPage_Checked"/>
@@ -77,6 +77,12 @@
 
             </Grid>
         </GroupBox>
+        <Grid HorizontalAlignment="Left" Height="100" Margin="1,-105,-3,0" VerticalAlignment="Top" Width="882" Grid.ColumnSpan="2">
+            <Label x:Name="label1" Content="Configurações" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+            <ComboBox x:Name="cboConfig" HorizontalAlignment="Left" Margin="19,36,0,0" VerticalAlignment="Top" Width="293" SelectionChanged="CboConfig_SelectionChanged"/>
+            <Button x:Name="btnNew" HorizontalAlignment="Left" Margin="317,36,0,0" VerticalAlignment="Top" Width="78" RenderTransformOrigin="4.388,-1.031" Height="23" Content="Novo" BorderBrush="Black" Click="BtnNew_Click"  />
+            <Button x:Name="btnDel" HorizontalAlignment="Left" Margin="400,36,0,0" VerticalAlignment="Top" Width="78" RenderTransformOrigin="4.388,-1.031" Height="23" Content="Excluír" BorderBrush="Black" Click="BtnDel_Click" />
+        </Grid>
 
     </Grid>
 </Window>
