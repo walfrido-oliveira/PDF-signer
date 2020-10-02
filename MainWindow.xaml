@@ -13,7 +13,8 @@
         </Menu>
         <Image x:Name="image" Height="178" Margin="293,83,268,158" Width="231" Source="Img/drag-and-drop.png" DragOver="Image_DragOver"  MouseLeftButtonDown="Image_MouseLeftButtonDown" DragEnter="Image_DragEnter" AllowDrop="True" DragLeave="Image_DragLeave" Drop="Image_Drop"/>
         <Image x:Name="wait" gif:ImageBehavior.AnimatedSource="Img/aguarde.gif" Margin="278,314,242,10" HorizontalAlignment="Center" VerticalAlignment="Center" Width="192" Height="95" Visibility="Hidden"/>
-        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="515,387,0,0" VerticalAlignment="Top" Width="267"/>
+        <ComboBox x:Name="comboBox" HorizontalAlignment="Right" Margin="0,0,15,10" VerticalAlignment="Bottom" Width="267"/>
+        <Label x:Name="label" Content="Configuração" HorizontalAlignment="Right" Margin="0,0,87,37" VerticalAlignment="Bottom" FontWeight="Bold" FontSize="18"/>
 
     </Grid>
 </Window>
